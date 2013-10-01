@@ -1,0 +1,27 @@
+<h2>Post Activity Report</h2>
+</br>
+<table border="true" width="100%">
+  <tr align=left bgcolor = "#c8860b">
+    <th width="20%">Title</th>
+    <th width="10%">Category</th>
+    <th width="40%">Description</th>
+    <th width="10%">User</th>
+    <th width="10%"> Total Comments </th>
+    <th width="10%"> Total Votes for Post </th>
+
+  </tr>
+
+  <% @posts.each do |post| %>
+      <tr>
+        <td><%= post.title %></td>
+        <td><%= post.category.category %></td>
+        <td><%= post.description %></td>
+        <td><%= post.user.email %></td>
+        <td><%= post.comments.count %></td>
+        <td><%= post.post_votes.count %></td>
+      </tr>
+  <% end %>
+</table>
+
+<br />
+

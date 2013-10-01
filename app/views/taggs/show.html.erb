@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @tagg.name %>
+</p>
+
+<p>
+  <b>Post:</b>
+  <%= @tagg.post %>
+</p>
+
+
+<%= link_to 'Edit', edit_tagg_path(@tagg) %> |
+<%= link_to 'Back', taggs_path %>

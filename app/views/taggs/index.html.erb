@@ -1,0 +1,25 @@
+<h2>Listing Tags</h2>
+</br>
+<table border ="true">
+  <tr align="left" bgcolor = "#c8860b">
+    <th>Name</th>
+    <th>Post</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @taggs.each do |tagg| %>
+  <tr>
+    <td><%= tagg.name %></td>
+    <td><%= tagg.post %></td>
+    <td><%= link_to 'Show', tagg %></td>
+    <td><%= link_to 'Edit', edit_tagg_path(tagg) %></td>
+    <td><%= link_to 'Destroy', tagg, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Tagg', new_tagg_path %>

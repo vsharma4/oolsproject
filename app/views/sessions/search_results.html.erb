@@ -1,0 +1,32 @@
+<h1>Search Results</h1>
+
+<table border="true">
+  <tr align=left bgcolor = "#c8860b">
+    <th width="10%">Title</th>
+    <th width="10%">Category</th>
+    <th width="30%">Description</th>
+    <th width="10%">Tags</th>
+    <th width="10%">User</th>
+  </tr>
+  <% if !@content.nil?  %>
+  <% for post in @content %>
+      <tr>
+        <% if current_user %>
+        <td><%= link_to h(post.title), post_path(post.id) %></td>
+        <% else %>
+            <td><%= link_to h(post.title), :controller => 'posts', :action => 'show_posts_unlogged', :id => post.id %></td>
+        <% end %>
+        <td><%= post.category.category %></td>
+        <td><%= post.description %></td>
+        <td>
+          <% post.taggs.each do |tagg| %>
+              <%= tagg.name %>
+          <% end%>
+        </td>
+        <td><%= post.user.email %></td>
+      </tr>
+  <% end %>
+  <% end %>
+</table>
+                              <br/>
+<%= link_to 'Back', '/show' %>

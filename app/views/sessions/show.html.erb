@@ -1,0 +1,19 @@
+<h2>Search for Post</h2>
+</br>
+<%= form_tag :controller => 'sessions', :action => 'search_results', :method => 'get' do %>
+    <%= text_field_tag :search, params[:search], :id => 'search_field' %> <br/>
+
+    </br>
+    <%= radio_button_tag :radio, "content" %>
+    <%= label_tag :searchLabel,"Search by content" %>
+    <%= radio_button_tag :radio, "user" %>
+    <%= label_tag :searchLabel,"Search by user" %>
+    <%= radio_button_tag :radio, "category" %>
+    <%= label_tag :searchLabel,"Search by category" %>
+    <%= radio_button_tag :radio, "tags" %>
+    <%= label_tag :searchLabel,"Search by tag" %>     <br/>
+
+    </br>
+    </br>
+    <%= submit_tag "Search", :name => nil %>
+<% end %>

@@ -1,0 +1,52 @@
+<%= form_for(@tagg) do |f| %>
+  <% if @tagg.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@tagg.errors.count, "error") %> prohibited this tagg from being saved:</h2>
+
+      <ul>
+      <% @tagg.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+    <table width =50%>
+      <tr align = left>
+        <td>
+          <div class="form_row">
+            <label for="theme">Select:</label>
+            <% [ 'Existing Tags', 'New Tag' ].each do |theme| %>
+                <br><%= radio_button_tag 'theme', theme, @theme == theme, :checked => 1 %>
+                <%= theme.humanize %>
+            <% end %>
+          </div>
+        </td>
+        <td>
+          <br></br>
+
+          <%arr = Tagg.find(:all)%>
+          <%tempx =  Array.new%>
+          <%tempy = Array.new%>
+          <%arr.each do |val|%>
+              <%  if !tempx.include? val.name%>
+                  <%tempx << val.name%>
+                  <%tempy << val%>
+              <%  end%>
+          <%end%>
+
+          <%= select("tagg", "id", tempy.collect{ |c| [ c.name, c.id] }) %>
+          <br><%= f.text_field :name %></br>
+
+        </td>
+      </tr>
+    </table>
+     </br>
+    <div class="actions">
+      <%= f.submit "Add Tag" %>
+    </div>
+
+    <%= hidden_field_tag('post_id',@post.id) %>
+
+<% end %>

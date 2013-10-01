@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+  <title>Backchannel App</title>
+  <%= stylesheet_link_tag    "application" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<div id="header" style="text-align: right">
+
+  <% if current_user %>
+      Signed in as <% if User.is_Admin?(current_user.id) %> Administrator - <% end %><%= current_user.name %>  (<%= current_user.email %>)
+      <%= link_to "Edit Profile", :controller => 'users', :action => 'edit', :id => current_user.id %> |
+      <% if current_user.id != 1 %>
+      <%= link_to "Delete My Account", :controller => 'users', :action => 'delete_account', :id => current_user.id %> |
+      <% end %>
+      <%= link_to "Sign Out", log_out_path %>
+  <% end %>
+</div>
+
+  <% if current_user %>
+      <%= link_to 'Home', posts_path %> |
+  <% else %>
+      <%= link_to 'Home', log_in_path %> |
+  <% end %>
+  <%= link_to 'Search', search_path %>
+  </br>
+<% if current_user and User.is_Admin?(current_user.id) %>
+    <%= link_to 'User Management', users_path %> |
+    <%= link_to 'Category Management', categories_path %> |
+    <%= link_to 'Posts/Comments Management', posts_path %>  |
+    <%= link_to 'Post Activity Report', '/report' %>
+
+<% end %>
+
+
+<% flash.each do |name, msg| %>
+    <%= content_tag :div, msg, :id => "flash_#{name}" %>
+<% end %>
+<br/>
+
+<%= yield %>
+
+</body>
+</html>

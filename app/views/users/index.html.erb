@@ -1,0 +1,43 @@
+<h2>Users</h2>
+</br>
+<table border="true" width="50%">
+  <tr align=left bgcolor = "#c8860b">
+    <th>Name</th>
+    <th>Email</th>
+    <th>Admin</th>
+    <th colspan="2">Actions</th>
+  </tr>
+
+  <% if current_user.id == 1 %>
+    <% @users.each do |user| %>
+    <tr>
+    <td><%= user.name %></td>
+    <td><%= user.email %></td>
+    <td><%= user.admin %></td>
+      <% if user.id != 2 %>
+      <% if is_self?(user.id) == false %>
+          <td><%= link_to 'Destroy', user, confirm: 'Are you sure?', method: :delete %> </td>
+      <% end %>
+      <% if user.admin == false %>
+          <td> <%= link_to "Make Admin", :action => 'upgrade_to_admin', :id => user.id %></td>
+
+      <% elsif is_self?(user.id) == false && user.admin == true %>
+          <td> <%= link_to "Remove Admin", :action => 'downgrade_to_admin', :id => user.id %></td>
+      <% end %>
+       <%end%>
+    </tr> <% end %>
+  <% elsif current_user.admin == true %>
+    <% @users.each do |user| %>
+    <tr>
+    <td><%= user.name %></td>
+    <td><%= user.email %></td>
+    <td><%= user.admin %></td>
+      <% if user.admin == false %>
+          <td><%= link_to 'Destroy', user, confirm: 'Are you sure?', method: :delete %></td>
+          <td> <%= link_to "Make Admin", :action => 'upgrade_to_admin', :id => user.id %></td>
+      <% end %>
+    </tr>
+  <% end %>
+  <% end %>
+</table>
+

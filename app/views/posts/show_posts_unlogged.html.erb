@@ -1,0 +1,53 @@
+<p>
+  <b>Category:</b>
+  <%= @post.category.category %>
+</p>
+
+<p>
+  <b>Username (email):</b>
+  <%= @post.user.email %>
+</p>
+
+<p>
+  <b>Title:</b>
+  <%= @post.title %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @post.description %>
+</p>
+
+<p>
+  <b>Tags:</b>
+  <% for tagg in @post.taggs %>
+      <%= tagg.name %>
+  <% end %>
+</p>
+
+<p>
+  <b>Votes:</b>
+  <%= @vote_post.count %>
+</p>
+
+</p>
+<table  border="true">
+  <tr align=left>
+    <th>comment</th>
+    <th>by user</th>
+    <th>when?</th>
+    <th>Votes</th>
+  </tr>
+  <% i=0 %>
+  <% for comment in @post.comments %>
+      <tr>
+        <td><%= comment.description %></td>
+        <td><%= comment.user.email %></td>
+        <td><%= distance_of_time_in_words_to_now comment.created_at %> ago</td>
+        <td><%= comment.comment_votes.count %>
+      </tr>
+  <% end %>
+</table>
+
+<%= link_to 'Back', search_path %>
+

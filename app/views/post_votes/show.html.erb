@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<b>Voters:</b>
+</br>
+<table border="true">
+  <tr align=left bgcolor="#c8860b">
+    <th> Name </th>
+    <th> Email </th>
+  </tr>
+  <% for vote_posts in @votes_for_post %>
+      <tr>
+        <td> <%= vote_posts.user.name%></td>
+        <td> <%= vote_posts.user.email %></td>
+      </tr>
+  <% end %>
+</table>
+</p>
+
+<%= link_to 'Back', vote_posts.post %>
